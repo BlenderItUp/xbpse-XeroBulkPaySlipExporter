@@ -49,8 +49,14 @@ After running the script, you will be prompted to enter your Xero `CID`. You can
 ## Example Output
 
 The exported pay slips will be saved as:
+```
 output/
 │
 ├── PaySlip_2024-06-24_to_2024-06-30__250043116.pdf
 ├── PaySlip_2024-07-01_to_2024-07-07__250043117.pdf
 └── ...
+```
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). See the [LICENSE](LICENSE) file for details.
+
