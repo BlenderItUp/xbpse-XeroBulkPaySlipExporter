@@ -14,7 +14,7 @@ def fetch_page(page, start):
         start=start,
         limit=50
     )
-    response = session.post(url, headers=headers, data=body, params={"CID": sid})
+    response = session.post(url, headers=headers, data=body, params={"CID": CID})
     
     if response.status_code != 200:
         print(f"Error: {response.status_code} - {response.reason}")
@@ -40,8 +40,8 @@ def safe_rename(default_filename, new_filename):
             counter += 1
     os.rename(default_filename, new_filename)
 
-# Ask the user for the SID input
-sid = input("Please enter your SID: ")
+# Ask the user for the CID input
+CID = input("Please enter your CID: ")
 
 # Create a folder for downloaded files
 folder_name = "output"
@@ -60,8 +60,8 @@ chrome_options.add_experimental_option("prefs", prefs)
 driver = webdriver.Chrome(options=chrome_options)
 
 print("Please sign in to Xero")
-# Open the login page with the user-provided SID
-login_url = f"https://payroll.xero.com/EmployeePortal/PayRunHistory?CID={sid}"
+# Open the login page with the user-provided CID
+login_url = f"https://payroll.xero.com/EmployeePortal/PayRunHistory?CID={CID}"
 driver.get(login_url)
 
 # Wait until the user is logged in
@@ -124,8 +124,8 @@ for item in all_data:
     start_date = convert_json_date(item['Period']['Weeks'][0]['StartDate'])
     end_date = convert_json_date(item['Period']['Weeks'][0]['EndDate'])
     
-    # Construct the URL using the SID provided by the user
-    pdf_url = f"https://payroll.xero.com/EmployeePortal/PayRunHistory/PrintPaySlip/{payslip_id}?payeeID={payee_id}&CID={sid}"
+    # Construct the URL using the CID provided by the user
+    pdf_url = f"https://payroll.xero.com/EmployeePortal/PayRunHistory/PrintPaySlip/{payslip_id}?payeeID={payee_id}&CID={CID}"
     
     # Make a GET request to download the PDF
     pdf_response = session.get(pdf_url)
